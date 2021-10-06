@@ -1,6 +1,26 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-//instance of a new Schema called campsiteScheme with 2 args 
+
+// used for docs storing comments 
+const commentSchema = new Schema({
+    rating: {
+        type: Number,
+        min: 1,
+        max: 5,
+        required: true
+    },
+    text: { //property
+        type: String,
+        required: true
+    },
+    author: { //property
+        type: String,
+        required: true
+    }
+}, {
+    timestamps: true
+});
+
 const campsiteSchema = new Schema({
     name: {
         type: String,
@@ -10,7 +30,8 @@ const campsiteSchema = new Schema({
     description: {
         type: String,
         required: true
-    }
+    },
+    comments: [commentSchema] //subschema inside campsiteSchema
 }, {
     timestamps: true
 });
